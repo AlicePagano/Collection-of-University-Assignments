@@ -1,0 +1,49 @@
+\documentclass[border=4pt]{standalone}
+
+\usepackage{tikz} 
+\usetikzlibrary{shapes,arrows,positioning,automata,backgrounds,calc,er,patterns}
+\usepackage{tikz-feynman}
+\tikzfeynmanset{compat=1.0.0}
+ \usepackage{physics}
+ 
+  %Use LuaLaTex to compile
+\begin{document}
+\begin{tikzpicture}
+  \begin{feynman}
+    %vertical
+    \vertex (x) at (0,6) { {\scriptsize \( \alpha \)}};
+    \vertex [dot] (x2) at (0, 5) {};
+    \vertex [dot] (x2p) at (0,3.5) {};   
+    \vertex [dot] (x1) at (0, 2) {};     
+    \vertex [dot] (x1p) at (2,2) {};
+    \vertex (x1pp) at (3,2);       
+    \vertex (y) at (0, 0) { {\scriptsize \( \beta \)}};
+    \diagram*
+        { 
+          (y)  -- [fermion] (x1) -- [photon, rmomentum={[arrow shorten=0.3]}] (x1p) -- [fermion, half left] (x1pp) -- [fermion, half left] (x1p),      
+	  (x1)  -- [fermion] (x2p) -- [boson, half right, momentum={[arrow shorten=0.3]}] (x2),  
+	  (x2p) -- [fermion] (x2),      	               
+          (x2) -- [fermion] (x),
+        };
+  \end{feynman}
+  \node[right] at (0.8,4.3) {\( k_2 \)};
+  \node[left] at (-0.1,1) {\(p_2\)};      
+  \node[left] at (-0.1,2.8) {\(p_1\)}; 
+  \node[left] at (-0.1,5.5) {\(k\)}; 
+  \node[left] at (-0.1,4.2) {\(q_1\)}; 
+  \node[right] at (x1pp) {\(q_2\)}; 
+  \node[below] at (1,2) {\(k_1\)}; 
+    
+  \node[above right] at (x1) {{\scriptsize \( \lambda \)}};
+  \node[below right] at (x1) {{\scriptsize \( \lambda' \)}};
+  \node[above left] at (x1p) {{\scriptsize \( \gamma \)}};
+  \node[below left] at (x1p) {{\scriptsize \( \gamma' \)}};  
+  \node[above right] at (x2p) {{\scriptsize \( \delta \)}};
+  \node[below right] at (x2p) {{\scriptsize \( \delta' \)}};    
+  \node[above right] at (x2) {{\scriptsize \( \mu \)}};
+  \node[below right] at (x2) {{\scriptsize \( \mu' \)}};        
+\end{tikzpicture}
+
+
+\end{document}
+%edge label=\(x_1\)

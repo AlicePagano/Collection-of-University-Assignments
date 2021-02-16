@@ -1,0 +1,553 @@
+\documentclass[11pt, a4paper, twoside, openright]{article}
+
+\input{macro/packages.tex}
+\input{macro/settings.tex}
+\input{macro/new_commands.tex}
+
+
+\begin{document}
+
+\title{\textbf{Homework 2}}
+
+\author{Alice Pagano \\ 1236916}
+
+\maketitle
+
+\section{Green’s function in the non-interacting system}
+Starting from the general expression for the Green’s function for a homogeneous system, \( G_{\alpha \beta } (\va{k}, \omega )\), \textbf{derive} the formula for the Green’s function in the \textbf{non-interacting system}, \( G_{\alpha \beta }^0 (\va{k}, \omega ) \).
+
+
+
+\section*{Solution}
+Let us consider the general expression for the Fourier transformed Green's function for a homogeneous (both in time and space) system:
+\begin{equation}
+  G_{\alpha \beta } (\va{k}, \omega )
+  =  \hbar V \sum_{n}^{}
+  \qty[
+  \frac{
+  \mathcolorbox{yellow!40}{\bra{\psi _0} \hat{\psi }_ \alpha
+   (0) \ket{ n \va{k}} \bra{n \va{k}} \hat{\psi }_ \beta ^\dag (0) \ket{\psi _0} }
+   }{ \hbar \omega - \qty( \mu + \varepsilon _n^{(N+1)}(\va{k})) + i \eta }
+   +
+  \frac{
+  \mathcolorbox{orange!50}{\bra{\psi _0} \hat{\psi }_ \beta ^\dag (0) \ket{n, -\va{k}} \bra{n, -\va{k}}  \hat{\psi }_ \alpha
+  (0)  \ket{\psi _0} }
+   }{  \hbar \omega - \qty( \mu - \varepsilon _n^{(N-1)} (-\va{k})) - i \eta } ]
+  \label{eq:start}
+\end{equation}
+where \( \varepsilon _n^{(N+1)}\) and \( \varepsilon _n^{(N-1)} \) are the excitation energies of the system with \( N+1 \) and \( N-1 \) particles respectively, \( \mu  \) is the chemical potential and \( \eta  \) is a small contribution \( \eta \rightarrow 0^+ \).
+
+
+We want to derive the formula for the Green's function in the non-interacting system (free Fermi system). First of all, the field operators for fermions are defined as:
+\begin{equation*}
+  \begin{cases}
+   \hat{\psi }_ \alpha  (\va{x}) \equiv  \sum_{\va{k}}^{} \varphi _{\va{k}, \alpha } (\va{x}) c_{\va{k}, \alpha }  \\
+\hat{\psi }_ \alpha ^\dag   (\va{x}) \equiv  \sum_{\va{k}}^{} \varphi _{\va{k}, \alpha } ^\dag  (\va{x}) c_{\va{k}, \alpha } ^\dag
+  \end{cases}
+\end{equation*}
+For a homogeneous system of electrons we can consider the single-particle wave function made by normalized plane wave
+\begin{equation*}
+  \varphi _{\va{k}, \alpha } (\va{x}) = \frac{e^{i \va{k} \vdot \va{x}} }{\sqrt{V} } \eta _{\alpha }
+\end{equation*}
+where \( V \) is the volume and \( \eta_ \alpha   \) the spin function which can be \( (1 \,\, 0 )^T\) or \( (0\,\, 1 )^T\).
+
+In particular, the field operators for \( \va{x}=0 \) have the form:
+\begin{equation*}
+  \hat{\psi }_ \alpha (0) = \sum_{\va{k}}^{} \frac{\eta _ \alpha }{\sqrt{V} } c_{\va{k}, \alpha }, \qquad
+  \hat{\psi }_ \beta ^\dag (0) = \sum_{\va{k}}^{} \frac{\eta _ \beta ^\dag  }{\sqrt{V} } c_{\va{k}, \beta }^\dag
+\end{equation*}
+
+
+In order to evaluate the Green’s function for a \textbf{non-interacting} system it is convenient to perform a \textbf{canonical transformation} to particles and holes.
+The latter consists in redefining the fermion operator
+\( c_{ \va{k}\alpha } \) as follow:
+\begin{equation}
+c_{\va{k}\alpha }=
+  \begin{cases}
+   a_{\va{k} \alpha } & \absvec{k} > k_F \quad \text{for \textbf{Particles} }\\
+   b_{-\va{k} \alpha }^\dag & \absvec{k} \le k_F\quad \text{for \textbf{Holes} }
+  \end{cases}
+\end{equation}
+where as defined
+\begin{itemize}
+\item \( a_{\va{k}\lambda  } \) destroys a \textbf{particle} \emph{above} the Fermi sea.
+\item \(  b_{-\va{k} \lambda }^\dag \) creates a \textbf{hole} (absence of a particle) \emph{inside} the Fermi sea.
+\end{itemize}
+Moreover, the physical meaning of the canonical transformation is that the ground state of the system has no particles inside (empty state), hence we have \( \ket{\psi _0} = \ket{0}   \). An important property is that the particle and hole destruction operators both annihilate the ground state:
+\begin{equation*}
+  \begin{cases}
+   a_{\va{k}\alpha } \ket{0} = 0 & \text{(there are no particles above the Fermi sea)} \\
+   b_{\va{k}\alpha } \ket{0} = 0 & \text{(there are no holes below the Fermi sea)}
+  \end{cases}
+\end{equation*}
+
+
+Now, we rewrite the field operators using the canonical transformation:
+\begin{subequations}
+\begin{align}
+  \hat{\psi }_ \alpha (0)  &= \sum_{\substack{\va{k}'' \\ \absvec{k''} > k_F  } }^{}  \frac{\eta _ \alpha }{\sqrt{V} } a_{\va{k}'', \alpha }
+  +
+  \sum_{\substack{\va{k}'' \\ \absvec{k''} \le k_F  } }^{}  \frac{\eta _ \alpha }{\sqrt{V} } b_{-\va{k}'', \alpha } ^\dag  \\ %newline
+  \hat{\psi }_ \beta ^\dag (0)  &= \sum_{\substack{\va{k}' \\ \absvec{k'} > k_F  } }^{}  \frac{\eta _ \beta }{\sqrt{V} } a_{\va{k}', \beta } ^\dag
+  +
+  \sum_{\substack{\va{k}' \\ \absvec{k'} \le k_F  } }^{}  \frac{\eta _ \beta }{\sqrt{V} } b_{-\va{k}', \beta }
+\end{align}
+\end{subequations}
+
+\subsubsection*{First term of Eq.\eqref{eq:start}}
+Let us focus on the yellow term of Eq.\eqref{eq:start}, since \( b_{-\va{k}',\beta } \ket{0} = 0 \) we can write:
+\begin{equation*}
+\begin{split}
+  \bra{n \va{k}} \hat{\psi }_ \beta ^\dag (0) \ket{0} &=
+  \bra{n \va{k}} \sum_{\substack{\va{k}' \\ \absvec{k'} > k_F  } }^{}  \frac{\eta _ \beta }{\sqrt{V} } a_{\va{k}', \beta } ^\dag
+  +
+  \sum_{\substack{\va{k}' \\ \absvec{k'} \le k_F  } }^{}  \frac{\eta _ \beta }{\sqrt{V} } b_{-\va{k}', \beta } \ket{0} \\
+  &=
+  \frac{1}{\sqrt{V} } \eta _ \beta
+  \sum_{\substack{\va{k}' \\ \absvec{k'} > k_F  } }^{}   \bra{n \va{k}}
+  a_{\va{k}', \beta } ^\dag \ket{0}
+ = \frac{1}{\sqrt{V} } \eta _ \beta
+ \sum_{\substack{\va{k}' \\ \absvec{k'} > k_F  } }^{}   \braket{n \va{k}}{\va{k}', \beta }
+\end{split}
+\end{equation*}
+where \( \ket{\va{k}', \beta }  \) is a state with one particle with wave vector \( \va{k}' \) and spin \( \beta  \).
+We have also:
+\begin{equation*}
+\begin{split}
+  \bra{0} \hat{\psi }_ \alpha
+     (0) \ket{ n \va{k}} &=
+    \qty( \bra{ n \va{k}} \hat{\psi }_ \alpha ^\dag
+      (0) \ket{ 0 } ) ^\dag
+     =   \frac{1}{\sqrt{V} } \eta _ \alpha
+     \sum_{\substack{\va{k}'' \\ \absvec{k''} > k_F  } }^{} \qty(  \braket{n \va{k}}{\va{k}'', \alpha  } ) ^\dag
+     = \frac{1}{\sqrt{V} } \eta _ \alpha
+     \sum_{\substack{\va{k}'' \\ \absvec{k''} > k_F  } }^{}  \braket{\va{k}'', \alpha  }{n \va{k}}
+\end{split}
+\end{equation*}
+In the denominator of this term, we have:
+\begin{equation*}
+  \hbar \omega - \qty( \mu + \varepsilon _n^{(N+1)}(\va{k})) + i \eta
+  =   \hbar \omega - \qty(  E_n^{(N+1)} (\va{k}) - E_0^{(N)} ) + i \eta
+\end{equation*}
+In the canonical transformation, as said, the ground state is shifted to zero
+: \( E_0^{(N)} = 0 \). Hence, the energy of the state \( n \) with one more particle of wave vector \( \va{k} \) is just given by:
+\begin{equation*}
+  E_n^{(N+1)} (\va{k}) = E_0 + \frac{\hbar^2 \absvec{k}^2 }{2m} = 0 + \frac{\hbar^2 \absvec{k}^2 }{2m} = \hbar \omega _k
+\end{equation*}
+Eventually, the first term of Eq.\eqref{eq:start} becomes:
+\begin{equation*}
+\begin{split}
+ \hbar V \sum_{n}^{}
+  \frac{
+  \bra{\psi _0} \hat{\psi }_ \alpha
+   (0) \ket{ n \va{k}} \bra{n \va{k}} \hat{\psi }_ \beta ^\dag (0) \ket{\psi _0}
+   }{ \hbar \omega - \qty( \mu + \varepsilon _n^{(N+1)}(\va{k})) + i \eta }
+   = \hbar V \sum_{n}^{}
+   \frac{1}{\sqrt{V} } \eta _ \alpha
+   \frac{1}{\sqrt{V} } \eta _ \beta \frac{
+      \sum_{\substack{\va{k}'', \va{k}' \\ \absvec{k''} > k_F, \absvec{k'} > k_F  } }^{}  \braket{\va{k}'', \alpha  }{n \va{k}}
+      \braket{n \va{k}}{\va{k}', \beta }
+    }{ \hbar \omega - \hbar \omega _k + i \eta}
+\end{split}
+\end{equation*}
+Now, we impose \( \delta _{\va{k},\va{k}'} \delta _{\va{k},\va{k}''} \) and we use the completness relation \( \sum_{n}^{} \ketbra{n \va{k}}{n \va{k}}  = \mathbb{1}  \). In order to get a non-vanishing contribution we note that the added particle must lie above the Fermi sea:
+\begin{equation*}
+\begin{split}
+ \hbar
+  \delta _{\alpha,\beta  } \frac{
+      \sum_{\substack{\va{k}'', \va{k}' \\ \absvec{k''} > k_F, \absvec{k'} > k_F  } }^{}  \bra{\va{k}'', \alpha  } \qty( \sum_{n}^{} \ket{n \va{k}}
+      \bra{n \va{k}} ) \ket{\va{k}', \beta }
+    }{ \hbar \omega - \hbar \omega _k + i \eta}
+   &=
+    \hbar
+     \delta _{\alpha,\beta  } \frac{
+         \sum_{\substack{\va{k}'', \va{k}' \\ \absvec{k''} > k_F, \absvec{k'} > k_F  } }^{}  \bra{\va{k}'', \alpha  } \ket{\va{k}', \beta }
+       }{ \hbar \omega - \hbar \omega _k + i \eta}
+       \delta _{\va{k},\va{k}'} \delta _{\va{k},\va{k}''} \\
+  &=
+   \frac{\hbar
+    \delta _{\alpha,\beta  }
+     }{ \hbar \omega - \hbar \omega _k + i \eta}
+     \sum_{\substack{\va{k}'', \va{k}' \\ \absvec{k''} > k_F, \absvec{k'} > k_F  } }^{}
+     \delta _{\va{k},\va{k}'} \delta _{\va{k},\va{k}''} \delta _{\va{k}'',\va{k}'}
+\end{split}
+\end{equation*}
+By exploiting the delta and rewriting the conditioned sum with the theta function, the first term of Eq.\eqref{eq:start} becomes:
+\begin{equation}
+  \hbar V \sum_{n}^{}
+   \frac{
+   \bra{\psi _0} \hat{\psi }_ \alpha
+    (0) \ket{ n \va{k}} \bra{n \va{k}} \hat{\psi }_ \beta ^\dag (0) \ket{\psi _0}
+    }{ \hbar \omega - \qty( \mu + \varepsilon _n^{(N+1)}(\va{k})) + i \eta }
+    = \hbar \delta _{\alpha \beta } \frac{\Theta (\absvec{k} - k_F )}{\hbar \omega - \hbar \omega _k + i \eta}
+    \label{eq:first_term}
+\end{equation}
+
+
+
+
+
+
+
+\subsubsection*{Second term of Eq.\eqref{eq:start}}
+Now, let us focus on the orange term of Eq.\eqref{eq:start}, since \( a_{\va{k}'',\alpha } \ket{0} = 0 \) we can write:
+\begin{equation*}
+\begin{split}
+  \bra{n, - \va{k}} \hat{\psi }_ \alpha  (0) \ket{0} &=
+  \bra{n, - \va{k}} \sum_{\substack{\va{k}'' \\ \absvec{k'} > k_F  } }^{}  \frac{\eta _ \alpha }{\sqrt{V} } a_{\va{k}'', \alpha}
+  +
+  \sum_{\substack{\va{k}'' \\ \absvec{k''} \le k_F  } }^{}  \frac{\eta _\alpha }{\sqrt{V} } b_{-\va{k}'', \alpha } ^\dag \ket{0} \\
+  &=
+  \frac{1}{\sqrt{V} } \eta _ \alpha
+  \sum_{\substack{\va{k}'' \\ \absvec{k''} \le k_F  } }^{}   \bra{n,- \va{k}}
+  b_{-\va{k}'', \alpha} ^\dag \ket{0}
+ = \frac{1}{\sqrt{V} } \eta _ \alpha
+ \sum_{\substack{\va{k}'' \\ \absvec{k''} \le k_F  } }^{}   \braket{n, - \va{k}}{-\va{k}'', \alpha }
+\end{split}
+\end{equation*}
+where \( \ket{-\va{k}'', \alpha  }  \) is a state with one hole with wave vector \( -\va{k}'' \) and spin \( \alpha   \).
+We have also:
+\begin{equation*}
+\begin{split}
+  \bra{0} \hat{\psi }_ \beta ^\dag
+     (0) \ket{ n, - \va{k}} &=
+    \qty( \bra{ n,- \va{k}} \hat{\psi }_ \beta
+      (0) \ket{ 0 } ) ^\dag
+     =   \frac{1}{\sqrt{V} } \eta _ \beta
+     \sum_{\substack{\va{k}' \\ \absvec{k'} \le k_F  } }^{} \qty(  \braket{n, - \va{k}}{ -\va{k}', \beta  } ) ^\dag
+     = \frac{1}{\sqrt{V} } \eta _ \beta
+     \sum_{\substack{\va{k}' \\ \absvec{k'} \le k_F  } }^{}  \braket{-\va{k}', \beta  }{n,- \va{k}}
+\end{split}
+\end{equation*}
+In the denominator of this term, we have:
+\begin{equation*}
+  \hbar \omega - \qty( \mu - \varepsilon _n^{(N+1)}(-\va{k})) - i \eta
+  =   \hbar \omega  + \qty(  E_n^{(N-1)} (-\va{k}) - E_0^{(N)} ) - i \eta
+\end{equation*}
+Again, in the canonical transformation the ground state is shifted to zero
+: \( E_0^{(N)} = 0 \). Hence, the energy of the state \( n \) with one more hole of wave vector \( -\va{k} \) is just given by:
+\begin{equation*}
+  E_n^{(N-1)} (-\va{k})= E_0 - \frac{\hbar^2 \absvec{k}^2 }{2m} = 0 - \frac{\hbar^2 \absvec{k}^2 }{2m} = -\hbar \omega _k
+\end{equation*}
+Eventually, the second term of Eq.\eqref{eq:start} becomes:
+\begin{small}
+\begin{equation*}
+\begin{split}
+ \hbar V \sum_{n}^{}
+ \frac{
+ \bra{\psi _0} \hat{\psi }_ \beta ^\dag (0) \ket{n, -\va{k}} \bra{n, -\va{k}}  \hat{\psi }_ \alpha
+ (0)  \ket{\psi _0}
+  }{  \hbar \omega - \qty( \mu - \varepsilon _n^{(N-1)} (-\va{k})) - i \eta }
+   = \hbar V \sum_{n}^{}
+   \frac{1}{\sqrt{V} } \eta _ \alpha
+   \frac{1}{\sqrt{V} } \eta _ \beta \frac{
+      \sum_{\substack{\va{k}'', \va{k}' \\ \absvec{k''} \le k_F, \absvec{k'} \le k_F  } }^{}  \braket{-\va{k}', \beta  }{n, - \va{k}}
+      \braket{n, - \va{k}}{-\va{k}'', \alpha }
+    }{ \hbar \omega - \hbar \omega _k - i \eta}
+\end{split}
+\end{equation*}
+\end{small}
+Again we impose \( \delta _{-\va{k},-\va{k}'} \delta _{-\va{k},-\va{k}''} \) and we use the completness relation \( \sum_{n}^{} \ketbra{n,- \va{k}}{n,- \va{k}}  = \mathbb{1}  \). In order to get a non-vanishing contribution we note that the added hole must lie below the Fermi surface:
+\begin{small}
+\begin{equation*}
+\begin{split}
+ \hbar
+  \delta _{\alpha,\beta  } \frac{
+      \sum_{\substack{\va{k}'', \va{k}' \\ \absvec{k''} \le k_F, \absvec{k'} \le k_F  } }^{}  \bra{-\va{k}', \beta  } \qty( \sum_{n}^{} \ket{n,- \va{k}}
+      \bra{n,- \va{k}} ) \ket{-\va{k}'', \alpha }
+    }{ \hbar \omega - \hbar \omega _k - i \eta}
+   &=
+    \hbar
+     \delta _{\alpha,\beta  } \frac{
+         \sum_{\substack{\va{k}'', \va{k}' \\ \absvec{k''} \le k_F, \absvec{k'} \le k_F  } }^{}  \bra{-\va{k}', \beta  } \ket{-\va{k}'', \alpha }
+       }{ \hbar \omega - \hbar \omega _k - i \eta}
+       \delta _{-\va{k},-\va{k}'} \delta _{-\va{k},-\va{k}''} \\
+  &=
+   \frac{\hbar
+    \delta _{\alpha,\beta  }
+     }{ \hbar \omega - \hbar \omega _k - i \eta}
+     \sum_{\substack{\va{k}'', \va{k}' \\ \absvec{k''} \le k_F, \absvec{k'} \le k_F  } }^{}
+     \delta _{-\va{k},-\va{k}'} \delta _{-\va{k},-\va{k}''} \delta _{-\va{k}'',-\va{k}'}
+\end{split}
+\end{equation*}
+\end{small}
+By exploiting the delta and rewriting the conditioned sum with the theta function, the second term of Eq.\eqref{eq:start} becomes:
+\begin{equation}
+  \hbar V \sum_{n}^{}
+  \frac{
+  \bra{\psi _0} \hat{\psi }_ \beta ^\dag (0) \ket{n, -\va{k}} \bra{n, -\va{k}}  \hat{\psi }_ \alpha
+  (0)  \ket{\psi _0}
+   }{  \hbar \omega - \qty( \mu - \varepsilon _n^{(N-1)} (-\va{k})) - i \eta }
+    = \hbar \delta _{\alpha \beta } \frac{\Theta ( k_F - \absvec{k}  )}{\hbar \omega - \hbar \omega _k - i \eta}
+    \label{eq:second_term}
+\end{equation}
+
+
+\subsubsection*{Green's function for non-interacting system}
+Finally, using Eq.\eqref{eq:first_term} and Eq.\eqref{eq:second_term}, we can rewrite Eq.\eqref{eq:start} as:
+\begin{equation}
+  G^0_{\alpha \beta } (\va{k}, \omega ) = \delta _{\alpha \beta } \qty[ \frac{\Theta (\absvec{k} - k_F )}{\omega - \omega _k + i \eta }
+  + \frac{\Theta ( k_F - \absvec{k} )}{\omega - \omega _k - i \eta }]
+  \label{eq:end}
+\end{equation}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage
+\section{\( \pmb{\expval{N}}  \) and \( \pmb{E_0} \) for the non-interacting system of electrons}
+Starting from the general expressions for obtaining the expectation value of any single-particle operator and the ground-state energy of a system from the Green’s function, \textbf{derive} the expectation value of the \textbf{total-number operator} \( \expval{N}  \) and the \textbf{total energy} \( E_0 \) for the \textbf{non-interacting system} of electrons.
+
+
+\section*{Solution}
+
+\subsection*{Expectation value of the total-number operator \( \pmb{\expval{N} } \)}
+Let us consider the expression of the \textbf{total-number operator} in second quantization:
+\begin{equation}
+  \hat{N} =
+  \int_{}^{} \dd[3]{\va{x}} \hat{\psi }_ \alpha ^\dag (\va{x}) \hat{\psi  }_ \alpha (\va{x})
+\end{equation}
+We start from the general expression for obtaining the expectation value of any single-particle operator as a function of the Green's function:
+\begin{equation}
+  \bra{\psi _0} \hat{N} (\va{x}) \ket{\psi _0}
+  = \pm i
+  \lim_{\substack{\va{x}' \rightarrow \va{x} \\ t' \rightarrow t } } \Tr \qty[ N_{\alpha \beta } G_{\alpha \beta }(\va{x}t,\va{x}'t')]
+  \label{eq:start_21}
+\end{equation}
+where for the total-number operator we have \( N_{\alpha \beta }=1 \) (we have to add also the integral) and in the case of fermions we should consider the minus sign.
+The Green's function for a system of free fermions is:
+\begin{equation}
+  i G_{\alpha \beta }^0 (\va{x}t,\va{x}'t')
+  = \frac{\delta _{\alpha \beta }}{V}
+  \sum_{\va{k}}^{} e^{i \va{k}\vdot (\va{x}-\va{x}')}
+  e^{-i \omega _{\va{k}} (t-t')}
+   \times \qty[ \Theta (t-t') \Theta (\absvec{k} -k_F) - \Theta (t'-t) \Theta (k_F- \absvec{k} )]
+   \label{eq:green_function_free}
+\end{equation}
+In particular, we note that for a non-interacting system of electrons the Green's function is homogeneous both in time and space, thus we have:
+\begin{equation*}
+  G_{\alpha \beta }(\va{x}t,\va{x}'t') = G_{\alpha \beta }(\va{x} - \va{x}',t-t')
+\end{equation*}
+Now, let us rewrite the Eq.\eqref{eq:start_21} using Eq.\eqref{eq:green_function_free}:
+\begin{small}
+\begin{equation*}
+\begin{split}
+\bra{\psi _0} \hat{N} (\va{x}) \ket{\psi _0}   &= -
+\int_{}^{} \dd[3]{x}    \lim_{\substack{\va{x}' \rightarrow \va{x} \\ t' \rightarrow t } } \sum_{\alpha \beta }^{}
+\qty[
+ \frac{\delta _{\alpha \beta }}{V}
+\sum_{\va{k}}^{} e^{i \va{k}\vdot (\va{x}-\va{x}')}
+e^{-i \omega _{\va{k}} (t-t')}
+ \times \qty[ \Theta (t-t') \Theta (\absvec{k} -k_F) - \Theta (t'-t) \Theta (k_F- \absvec{k} )]
+ ]
+ \\
+\end{split}
+\end{equation*}
+\end{small}
+By exploiting the limit we obtain:
+\begin{equation*}
+  \bra{\psi _0} \hat{N} (\va{x}) \ket{\psi _0}   = -
+  \int_{}^{} \dd[3]{\va{x}} \sum_{\alpha }^{}
+  \qty[
+   \frac{1}{V}
+  \sum_{\va{k}}^{}
+  \qty[ - \Theta (k_F- \absvec{k} )]
+   ]
+\end{equation*}
+where we have \( \Theta (t-t') \rightarrow  0 \) because \( t' \rightarrow t \) from above (\( t' \) is infinitesimally later than \( t \)).
+Since there are no terms inside the last expression depending on the spin index, we have that the sum over all possible values of spins is:
+\begin{equation*}
+  \sum_{\alpha }^{} 1 = \mu
+\end{equation*}
+where in the case of electrons the only two possibilities are \( 1/2 \) and \( -1/2 \), thus the spin degeneracy is \( \mu =2 \).
+Eventually, by making this substitution and exploiting the integral (\( \int_{}^{} \dd[3]{x} = V  \)) we obtain:
+\begin{equation*}
+  \bra{\psi _0} \hat{N} (\va{x}) \ket{\psi _0}   =
+  \int_{}^{} \dd[3]{\va{x}}
+  \frac{\mu }{V} \sum_{\substack{ \va{k}\\ \absvec{k} \le k_F} }^{}  1 =
+  \mu \sum_{\substack{ \va{k}\\ \absvec{k} \le k_F} }^{}  1
+\end{equation*}
+Now, lets try to make the sum over all these states:
+\begin{equation*}
+  \sum_{\substack{ \va{k}\\ \absvec{k} \le k_F} }^{} 1 = \frac{N}{\mu }
+\end{equation*}
+Indeed, the sum over all possible states \(  \absvec{k} \le k_F  \) is equal to the total number of particles \( N \) over the spin degeneracy \( \mu  \), because, due to the Pauli exclusion principle, in the same level there could be at most \( \mu  \) particles. In conclusion, we obtain that the expectation value of the total-number operator is equal to:
+\begin{equation}
+  \bra{\psi _0} \hat{N} (\va{x}) \ket{\psi _0}  =
+  \mu \frac{N}{\mu } = N
+\end{equation}
+
+
+
+
+
+
+
+
+\subsection*{Ground state energy for the non-interacting system \( \pmb{E_0 } \)}
+Let us consider the general expression for the ground state energy of a system as a function of the Green's function:
+\begin{equation}
+  E = \expval{\hat{H} }{\psi_0}
+  = \pm \frac{i}{2}
+  \int_{}^{} \dd[3]{\va{x}} \lim_{\substack{\va{x}'\rightarrow \va{x} \\ t' \rightarrow t^+} }  \qty[ \mathcolorbox{yellow!40}{i \hbar \pdv{}{t}} - \mathcolorbox{orange!40}{\frac{\hbar ^2 \grad ^2_x}{2m}}] \Tr G (\va{x}t,\va{x'}t')
+  \label{eq:2_start}
+\end{equation}
+where for fermions we have the minus sign.
+We recall the expression of the  Green's function for a system of free fermions:
+\begin{equation}
+  i G_{\alpha \beta }^0 (\va{x}t,\va{x}'t')
+  = \frac{\delta _{\alpha \beta }}{V}
+  \sum_{\va{k}}^{} e^{i \va{k}\vdot (\va{x}-\va{x}')}
+  e^{-i \omega _{\va{k}} (t-t')}
+   \times \qty[ \Theta (t-t') \Theta (\absvec{k} -k_F) - \Theta (t'-t) \Theta (k_F- \absvec{k} )]
+   \label{eq:green_function_free2}
+\end{equation}
+Firstly, we apply the yellow operator in Eq.\eqref{eq:2_start} to the Green's function:
+\begin{equation*}
+\begin{split}
+i \hbar \pdv{}{t} G_{\alpha \beta }^0 (\va{x}t,\va{x}'t') &=
+ \hbar \pdv{}{t} \frac{\delta _{\alpha \beta }}{V}
+\sum_{\va{k}}^{} e^{i \va{k}\vdot (\va{x}-\va{x}')}
+e^{-i \omega _{\va{k}} (t-t')}
+ \times \qty[ \Theta (t-t') \Theta (\absvec{k} -k_F) - \Theta (t'-t) \Theta (k_F- \absvec{k} )]
+ \\
+ &=  \hbar  \frac{\delta _{\alpha \beta }}{V}
+ \sum_{\va{k}}^{} e^{i \va{k}\vdot (\va{x}-\va{x}')} (- i  \omega _{\va{k}})
+ e^{-i \omega _{\va{k}} (t-t')}
+  \times \qty[ \Theta (t-t') \Theta (\absvec{k} -k_F) - \Theta (t'-t) \Theta (k_F- \absvec{k} )] +\\
+ & \quad +  \hbar
+ \frac{\delta _{\alpha \beta }}{V}
+ \sum_{\va{k}}^{} e^{i \va{k}\vdot (\va{x}-\va{x}')}
+ e^{-i \omega _{\va{k}} (t-t')}
+  \times \qty[ \delta _{t,t'} \Theta (\absvec{k} -k_F) - \delta _{t,t'} \Theta (k_F- \absvec{k} )]
+\end{split}
+\end{equation*}
+and we take the limit for \( \va{x}' \rightarrow \va{x}, t' \rightarrow t^+ \), obtaining:
+\begin{equation}
+\begin{split}
+i \hbar \pdv{}{t} G_{\alpha \beta }^0 (\va{x}t,\va{x}'t') &=
+ \hbar \frac{\delta _{\alpha \beta }}{V} \sum_{\va{k}}^{} (- i  \omega _{\va{k}})
+ \times \qty[ -  \Theta (k_F- \absvec{k} )]
+\end{split}
+\label{eq:2_timederivative}
+\end{equation}
+where we have used \( \delta _{t,t'} =0 \) and \( \Theta (t-t') =0 \) because \( t' \rightarrow t \) from above.
+Now, we apply the orange operator in Eq.\eqref{eq:2_start} to the Green's function in Eq.\eqref{eq:green_function_free2}:
+\begin{equation*}
+\begin{split}
+\frac{\hbar ^2 \grad ^2_x}{2m} G_{\alpha \beta }^0 (\va{x}t,\va{x}'t') &= \frac{1}{i} \frac{\hbar ^2 \grad ^2_x}{2m}
+\frac{\delta _{\alpha \beta }}{V}
+\sum_{\va{k}}^{} e^{i \va{k}\vdot (\va{x}-\va{x}')}
+e^{-i \omega _{\va{k}} (t-t')}
+ \times \qty[ \Theta (t-t') \Theta (\absvec{k} -k_F) - \Theta (t'-t) \Theta (k_F- \absvec{k} )]
+ \\
+&= \frac{1}{i} \frac{\hbar ^2}{2m}
+\frac{\delta _{\alpha \beta }}{V}
+\sum_{\va{k}}^{} (- \absvec{k} ^2) e^{i \va{k}\vdot (\va{x}-\va{x}')}
+e^{-i \omega _{\va{k}} (t-t')}
+ \times \qty[ \Theta (t-t') \Theta (\absvec{k} -k_F) - \Theta (t'-t) \Theta (k_F- \absvec{k} )]
+\end{split}
+\end{equation*}
+Again, taking the limit \( \va{x}' \rightarrow \va{x}, t' \rightarrow t^+ \), we have:
+\begin{equation}
+\frac{\hbar ^2 \grad ^2_x}{2m} G_{\alpha \beta }^0 (\va{x}t,\va{x}'t') =
+\frac{1}{i} \frac{\hbar ^2}{2m}
+\frac{\delta _{\alpha \beta }}{V}
+\sum_{\va{k}}^{} (- \absvec{k} ^2)
+\times \qty[ -  \Theta (k_F- \absvec{k} )]
+\label{eq:2_spatialderivative}
+\end{equation}
+Now, we substitute the results obtained in Eq.\eqref{eq:2_timederivative} and Eq.\eqref{eq:2_spatialderivative} in the general expression of Eq.\eqref{eq:2_start}:
+\begin{equation*}
+  E = -\frac{i}{2}
+  \int_{}^{} \dd[3]{\va{x}}
+  \sum_{\alpha }^{}
+  \qty[
+  \hbar \frac{\delta _{\alpha \beta }}{V} \sum_{\va{k}}^{} ( i  \omega _{\va{k}})
+  \times  \Theta (k_F- \absvec{k} )
+  - \frac{1}{i} \frac{\hbar ^2}{2m}
+  \frac{\delta _{\alpha \beta }}{V}
+  \sum_{\va{k}}^{} ( \absvec{k} ^2)
+  \times  \Theta (k_F- \absvec{k} )
+  ]
+\end{equation*}
+Now, we perform the integral obtaining \( \int_{}^{} \dd[]{\va{x}} = V  \), which simply the volume terms. We exploit also the \( \delta _{\alpha \beta } \) and since there are no terms depending on the spin index the \( \sum_{\alpha }^{} 1 = \mu    \), where \( \mu  \) is the number of possible spin values. Eventually, by making some semplification we obtain the following formula:
+\begin{equation*}
+  \begin{split}
+  E &= \frac{\mu}{2}
+  \qty[
+  \sum_{\va{k}}^{} ( \hbar   \omega _{\va{k}})
+  \times  \Theta (k_F- \absvec{k} )
+  + \frac{\hbar ^2}{2m}
+  \sum_{\va{k}}^{} ( \absvec{k} ^2)
+  \times  \Theta (k_F- \absvec{k} )
+  ]  \\
+  &=
+  \frac{\mu}{2}
+ \Big(
+ \sum_{\substack{\va{k} \\  \absvec{k} \le k_F } }^{} \hbar   \omega _{\va{k}}
+ + \frac{\hbar ^2}{2m}
+\sum_{\substack{\va{k} \\  \absvec{k} \le k_F } }^{}
+\absvec{k} ^2
+ \Big)
+  \end{split}
+\end{equation*}
+By recalling that \( \hbar \omega_{\va{k}} = \varepsilon_{\va{k}} = \hbar^2 \absvec{k}^2/(2m)   \), we have:
+\begin{equation*}
+  \begin{split}
+  E &=
+  \frac{\mu}{2}
+ \Big(
+ \sum_{\substack{\va{k} \\  \absvec{k} \le k_F } }^{} \frac{\hbar ^2}{2m} \absvec{k} ^2
+ +
+\sum_{\substack{\va{k} \\  \absvec{k} \le k_F } }^{}
+\frac{\hbar ^2}{2m} \absvec{k} ^2
+ \Big)
+ = \mu  \sum_{\substack{\va{k} \\  \absvec{k} \le k_F } }^{} \frac{\hbar ^2}{2m} \absvec{k} ^2
+  \end{split}
+\end{equation*}
+In order to compute the sum, we transform the sum in an integral with the usual formula. In our specific case we have:
+\begin{equation*}
+  \begin{split}
+  \sum_{\substack{\va{k} \\  \absvec{k} \le k_F } }^{}
+  \frac{\hbar ^2}{2m} \absvec{k} ^2   \overset{L \rightarrow \infty }{\longrightarrow  }
+  & \frac{V}{(2 \pi )^3} \int_{\absvec{k} \le k_F}^{} \dd[3]{\va{k}}
+  \frac{\hbar ^2}{2m} \absvec{k} ^2
+  =
+  \frac{V}{(2 \pi )^3} \int_{\absvec{k} \le k_F}^{} \dd[]{k} (4 \pi k^2)
+  \frac{\hbar ^2}{2m} k ^2 = \\
+  &=
+  \frac{V}{(2 \pi )^3} (4 \pi ) \frac{\hbar ^2}{2m} \int_{0}^{k_F} \dd[]{k} k^4
+  =\frac{V}{(2 \pi )^3} (4 \pi ) \frac{\hbar ^2}{2m} \frac{k_F^5}{5}
+  \end{split}
+\end{equation*}
+We can simplify the last result using the relations:
+\begin{equation*}
+  \varepsilon _F = \frac{\hbar ^2 k_F^2}{2m}, \qquad k_F^3 =  \frac{6 \pi ^2}{\mu } \frac{N}{V}
+\end{equation*}
+Finally:
+\begin{equation}
+  E = \cancel{ \mu }  \qty( \frac{3}{5} \frac{1}{\cancel{ \mu } } \varepsilon _F N)
+  = \frac{3}{5} \varepsilon _F N
+\end{equation}
+The result obtained is consistent with what expected. In particular we notice that the energy per particle is positive as a consequence of the Pauli exclusion principle because when we try to occupy the states in the Fermi sphere we cannot put all the electrons in the lowest energy state but we should occupy also states at finite energy.
+
+
+
+
+
+\end{document}

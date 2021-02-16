@@ -1,0 +1,31 @@
+\documentclass[border=4pt]{standalone}
+
+\usepackage{tikz} 
+\usetikzlibrary{shapes,arrows,positioning,automata,backgrounds,calc,er,patterns}
+\usepackage{tikz-feynman}
+\tikzfeynmanset{compat=1.0.0}
+ \usepackage{physics}
+ 
+  %Use LuaLaTex to compile
+\begin{document}
+\begin{tikzpicture}
+  \begin{feynman}
+    %vertical
+    \vertex (x) at (0,6); %{\(x\) {\scriptsize \( \alpha \)}};
+    \vertex [dot] (x2) at (0, 5) {};
+    \vertex [dot] (x2p) at (0,3.5) {};   
+    \vertex [dot] (x1) at (0, 2) {};     
+    \vertex [dot] (x1p) at (2,2) {};
+    \vertex (x1pp) at (3,2);       
+    \vertex (y) at (0, 0); %{\(y\) {\scriptsize \( \beta \)}};
+    \diagram*
+        { 
+          (y)  -- [fermion] (x1) -- [photon] (x1p) -- [fermion, half left] (x1pp) -- [fermion, half left] (x1p),      
+	  (x1)  -- [fermion] (x2p) -- [boson, half right] (x2),  
+	  (x2p) -- [fermion] (x2),      	               
+          (x2) -- [fermion] (x),
+        };
+  \end{feynman}    
+\end{tikzpicture}
+
+\end{document}
