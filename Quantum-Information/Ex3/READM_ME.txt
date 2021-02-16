@@ -1,0 +1,30 @@
+EXERCISE 3
+-------------------------------------------------------------------------------------------------------------------
+
+Student: Alice Pagano 
+Number : 1236916
+
+-------------------------------------------------------------------------------------------------------------------
+
+The files are organized as follow:
+
++ /Code:
+
+	- /src:
+		- elem_datatype.F: file with pre-processing options;
+		- error_handling.f90: file which define the module error_handling.mod;
+		- error_handling_common_errors.f90: file which define the module error_handling_common_errors.mod;
+		- matrix_type.f90: file which define the module matrix_type.mod;
+		- debug_checkpoint.f90: file which define the module debug_checkpoint.mod;
+
+	- demo.f90: simple program which uses the matrix_type.mod
+
+	- Makefile: to compile the code use this makefile:
+		- open a terminal in the folder /02_Derived_types
+		- digit: make 
+		- the code will be compiled and the demo program will run
+		
+	- demo: the executable.
+
+
++ Ex3_Alice-Pagano.pdf: report of the exercise.

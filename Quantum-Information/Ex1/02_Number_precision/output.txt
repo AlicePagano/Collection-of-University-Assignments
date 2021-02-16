@@ -1,0 +1,34 @@
+ Starting the program...
+
+ INTEGER number:
+
+ KIND =            2
+ HUGE =   32767
+
+ KIND =            4
+ HUGE =   2147483647 
+
+
+ REAL number in SINGLE PRECISION:
+
+ KIND =            4
+ HUGE =    3.40282347E+38
+ PRECISION =            6
+ RANGE =           37 
+
+
+ REAL number in DOUBLE PRECISION
+ KIND =            8
+ HUGE =    1.7976931348623157E+308
+ PRECISION =          15
+ RANGE =          307 
+
+
+ Let us print some examples...
+
+ Sum between integer(2) numbers:      -31615
+ Sum between integer(4) numbers:     2000001
+ Sum between real numbers in SINGLE PRECISION:                3.14159278E+32
+ Sum between the same real numbers but in DOUBLE PRECISION:   3.1415926536039354E+032
+
+ ...ending the program.

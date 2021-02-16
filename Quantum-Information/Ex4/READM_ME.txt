@@ -1,0 +1,47 @@
+EXERCISE 4
+-------------------------------------------------------------------------------------------------------------------
+
+Student: Alice Pagano 
+Number : 1236916
+
+-------------------------------------------------------------------------------------------------------------------
+
+The files are organized as follow:
+
++ /Code :
+
+	- input.py : python script which generate the file input.dat
+
+	- script.py : python script which load the input data and compile and run the code for 
+		      different optimization flags. It use the gnuplot script fit.p for plotting data.
+
+	- fit.p : gnuplot script for plotting and fitting 
+
+	- /src :
+		- elem_datatype.F: file with pre-processing options;
+		- error_handling.f90: file which define the module error_handling.mod;
+		- error_handling_common_errors.f90: file which define the module error_handling_common_errors.mod;
+		- matrix_type.f90: file which define the module matrix_type.mod;
+		- debug_checkpoint.f90: file which define the module debug_checkpoint.mod;
+
+	- /matrix_multiplication :
+		- mat_mult_row.f90: matrix multiplication is executed with MatMultbyRow
+		- mat_mult_col.f90: matrix multiplication is executed with MatMultbyCol
+		- mat_mult_mat.f90: matrix multiplication is executed with MatMul
+
+	- /time : contains output files of matrix multiplication
+	
+	- /plot : contains plot of output files of matrix multiplication
+
+	- Makefile 
+		
+	- mat_mult_row, mat_mult_col, mat_mult_mat: the executables.
+
++ /Results : 
+	- /time : output data obtained
+	- /plot : resulting plot
+
++ Ex4_Alice-Pagano.pdf: report of the exercise.
+
++ Ex4.pdf : exercise.
+

@@ -1,0 +1,241 @@
+\documentclass[rmp,10pt,onecolumn,fleqn,notitlepage]{revtex4-1}
+
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{latexsym,amsmath}
+\usepackage{physics}
+\usepackage{tabularx}
+\usepackage{float}
+\usepackage{siunitx}
+\usepackage{amssymb}
+
+% Listing packages
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{framed}
+\usepackage{inconsolata} % To change the listing font
+
+% URL package and setting
+\definecolor{linkcolor}{rgb}{0,0,0.65} %hyperlink
+\usepackage[pdftex,colorlinks=true, pdfstartview=FitV, linkcolor= linkcolor, citecolor= linkcolor, urlcolor= linkcolor, hyperindex=true,hyperfigures=true]{hyperref} %hyperlink%
+
+\usepackage{fancyhdr} % To change page setting
+
+% PAGE SETTING
+\pagestyle{fancyplain}
+\fancyhf{}
+\fancyfoot[R]{\thepage}
+\fancyfoot[L]{\today}
+\fancyhead[L]{\textbf{Week 2 Report, Quantum Information and Computing (2020)}}
+\fancyhead[R]{\textbf{Alice Pagano}}
+\renewcommand{\headrulewidth}{0.1pt}
+\renewcommand{\footrulewidth}{0.1pt}
+
+% LISTING SETTINGS
+\definecolor{cadmiumred}{rgb}{0.89, 0.0, 0.13}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{commentcolour}{rgb}{0.43,0.63,0.65}
+\definecolor{darkgreen}{rgb}{0.0, 0.5, 0.0}
+
+\lstdefinestyle{Fortran}{language=Fortran,
+    backgroundcolor=\color{white},
+    commentstyle=\color{commentcolour},
+    keywordstyle=\bfseries\color{cadmiumred},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{darkgreen},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    frame=single,
+    framexleftmargin=11pt,
+    %rulecolor=\color{cadmiumred}
+}
+\lstset{style=Fortran}
+
+% BIBLIOGRAPHY FILE AND SETTING
+\begin{filecontents*}{\jobname.bib}
+@article{cite1,
+    Author = {John Doe and James Doe},
+    Issue = {71},
+    Journal = {Phys. Rev. B},
+    Month = {Mar},
+    Numpages = {0},
+    Pages = {5321},
+    Publisher = {American Physical Society},
+    Title = {SCIENCE!},
+    Volume = {32},
+    Year = {1994}}
+
+@article{cite2,
+Author = {Jane Name and Other Person},
+    Issue = {71},
+    Journal = {Phys. Rev. E},
+    Month = {Mar},
+    Numpages = {0},
+    Pages = {5321},
+    Publisher = {American Physical Society},
+    Title = {SCIENCE!},
+    Volume = {32},
+    Year = {2078}}
+}
+\end{filecontents*}
+\bibliographystyle{aipnum4-1}
+\setcitestyle{numbers,square}
+
+
+
+
+
+
+
+
+
+
+\begin{document}
+
+
+
+\title{Week 2: Derived Types in Fortran}
+\author{Alice Pagano}
+\date{\today}
+
+\begin{abstract}
+A data structure is a collection of data values, the relationships among them, and the functions or operations that can be applied to the data.
+One can use the data structures already provided by the programming language; however, to have more control of the code and to develop efficient software solutions, sometimes it is necessary to define new data structures.
+Fortran provides five intrinsic data structures (also called types): integer, real, complex, logical and character type. However, we can derive also our own data types as well.
+In this Report, we define a module which contains a matrix derived type both for real and complex number in double precision. We define functions which initialize and delete this new type. Moreover, we define the functions to compute the trace of the matrix and its adjoint. Finally, the module is tested with a simple demo program.
+\end{abstract}
+
+\maketitle
+
+
+\section{Theory}
+A matrix is a grid of $n \times m$ (rows and columns) numbers surrounded by brackets.
+We can add and subtract matrices of the same size, multiply one matrix with another as long as the sizes are compatible ($(n \times m) \times (m \times p) = n \times p)$, and multiply an entire matrix by a constant.
+
+Let us consider a \( n \times m \) matrix \( A \) with complex entries. The \textbf{conjugate transpose} \( A^{\dagger} \) (or \textbf{adjoint}) is the \( m \times n \) matrix obtained by taking the transpose of \( A \) and then taking the complex conjugate of each entry (the complex conjugate of \( a + i b \) being \( a - i b \), for real numbers \( a \) and \( b \)):
+\begin{equation}
+  \boldsymbol{A}^\mathsf{\dagger}= \overline{\boldsymbol{A}^\mathsf{T}}
+\end{equation}
+For real matrices, the conjugate transpose is just the transpose, \( \boldsymbol{A}^\mathsf{\dagger}=  \boldsymbol{A}^\mathsf{T} \).
+
+
+Now, let us consider a square matrix \( A \in (n\times n) \) with general entries. The \textbf{trace} of a square matrix is is defined to be the sum of elements on the main diagonal (from the upper left to the lower right) of \( A \):
+\begin{equation}
+  \Tr(\boldsymbol{A}) = \sum_{i=1}^{n} a_{ii}  = a_{11} + a_{22} + \dots + a_{nn}
+\end{equation}
+Moreover, the \textbf{determinant} is a scalar value that can be computed from the elements of a square matrix and encodes certain properties of the linear transformation described by the matrix. It is denoted as \( \det(\boldsymbol{A})  \).
+
+
+\section{Code development}
+In Fortran 90, we write a {\bfseries\texttt{MATRIX$\_$TYPE}} module (in the file “matrix$\_$type.f90”) which contains a matrix derived type. This Matrix type definition includes:
+
+    \begin{center}
+      \begin{minipage}[t]{0.43\linewidth}%\vspace{0pt}
+
+          \begin{itemize}
+          \item the matrix dimension stored in a vector of two dimension, {\bfseries\texttt{N}};
+          \item matrix elements ({\bfseries\texttt{ELEM}}) of type {\bfseries\texttt{ELEM}$\_$\texttt{TYPE}};
+          \item matrix trace ({\bfseries\texttt{Tr}}) of type {\bfseries\texttt{ELEM}$\_$\texttt{TYPE}};
+          \item matrix determinant ({\bfseries\texttt{Det}}) of type {\bfseries\texttt{ELEM}$\_$\texttt{TYPE}}.
+          \end{itemize}
+
+      \end{minipage}
+      \hspace{0.8cm}
+      \begin{minipage}[t]{0.49\linewidth}%\vspace{0pt}
+      %\textbf{Matrix Type Code:}
+\begin{lstlisting}[style=Fortran]
+TYPE Matrix
+    INTEGER, dimension(2) :: N
+    ELEM_TYPE, dimension(:,:), allocatable :: Elem
+    ELEM_TYPE :: Det
+    ELEM_TYPE :: Tr
+END TYPE Matrix
+\end{lstlisting}
+      \end{minipage}
+    \end{center}
+
+The type {\bfseries\texttt{ELEM}$\_$\texttt{TYPE}} can be double real ({\bfseries\texttt{DM}$\_$\texttt{ELEM}$\_$\texttt{KIND}}) or double complex ({\bfseries\texttt{ZM}$\_$\texttt{ELEM}$\_$\texttt{KIND}}). In particular, it is chosen at the compilation stage by the pre-processing options and it is defined in the file “elem$\_$datatype.F”. Let us note that mixed types are not allowed in the program.
+
+\clearpage
+
+In the module are defined the following functions/subroutines:
+\begin{itemize}
+\item \texttt{SUBROUTINE} {\bfseries\texttt{MatInit}}\texttt{(MatServ, N, ctrl)}: it takes as input a matrix (\texttt{MatServ}) and its dimension (\texttt{N}). The matrix is initialized depending on the value of the character \texttt{ctrl}:
+
+ \begin{itemize}
+ \item if \texttt{ctrl} is equal to \texttt{'N'} the matrix is not initialized;
+ \item if \texttt{ctrl} is equal to \texttt{'Z'} the matrix is initialized with zeros;
+ \item if \texttt{ctrl} is equal to \texttt{'O'} the matrix is initialized with ones;
+ \item if \texttt{ctrl} is equal to \texttt{'R'} the matrix is initialized with random numbers between \( [0,1] \);
+ \end{itemize}
+ Then, the matrix trace and the matrix determinant are set to zero;
+
+\item \texttt{SUBROUTINE} {\bfseries\texttt{MatTrace}}\texttt{(MServ)}: it first checks if \texttt{MServ} is a square matrix and, in this case, this subroutine computes the matrix trace;
+
+\item \texttt{FUNCTION} {\bfseries\texttt{MatAdjoint}}\texttt{(MServ)}: it computes the adjoint of the matrix \texttt{MServ};
+
+\item \texttt{SUBROUTINE} {\bfseries\texttt{MatWrite}}\texttt{(MatServ,MatName)}: it takes as input the matrix \texttt{MatServ} and (optionally) a string with its name (\texttt{MatName}). This subroutine writes in a text formatted file: the name of the matrix, size, elements, trace and determinant;
+
+\item \texttt{SUBROUTINE} {\bfseries\texttt{MatDel}}\texttt{(MatServ)}: it deletes the matrix \texttt{MatServ}.
+
+\end{itemize}
+Moreover, the corresponding interface \texttt{Trace} and interface operator \texttt{.Adj.} are defined for {\bfseries\texttt{MatTrace}} subroutine and {\bfseries\texttt{MatAdjoint}} function.
+
+This module is tested with a simple demo program (“demo.f90”). The main steps of this program are:
+\begin{center}
+  \begin{minipage}[t]{0.43\linewidth}%\vspace{0pt}
+
+      \begin{itemize}
+      \item the row and column of the matrix are given in input;
+      \item a matrix \( A \) with size \( N \) is random initialized and its trace is computed;
+      \item then we compute the adjoint of \( A \) obtaining the matrix \( B \);
+      \item we write both matrices in a file for comparison;
+      \item we delete \( A \) and \( B \).
+      \end{itemize}
+
+  \end{minipage}
+  \hspace{0.8cm}
+  \begin{minipage}[t]{0.49\linewidth}%\vspace{0pt}
+  %\textbf{Matrix Type Code:}
+  \begin{lstlisting}[style=Fortran]
+  program demo
+      USE MATRIX_TYPE
+      ...
+      CALL MatInit(A, N, ctrl='R')
+      CALL Trace(A)
+      B = .Adj.A
+      CALL MatWrite(A,'A')
+      CALL MatWrite(B,'A_adjoint')
+      CALL MatDel(A)
+      CALL MatDel(B)
+  end program demo
+\end{lstlisting}
+  \end{minipage}
+\end{center}
+
+The entire code can be easily compiled with the use of a makefile. As said, at the compilation stage the desired {\bfseries\texttt{ELEM}$\_$\texttt{TYPE}} can be chosen by selecting the option {\bfseries\texttt{D}} for double real and {\bfseries\texttt{Z}} for double complex.
+
+
+\section{Results}
+We run the demo program for different sizes of the matrix. The results obtained are corrected both for double real and double complex numbers. The text files printed by {\bfseries\texttt{MatWrite}} subroutine looks well formatted and with all the information needed.
+
+
+\section{Self-Evaluation}
+The matrix determinant is included in the matrix type definition, however it is not computed in this version of the code. It could be interesting implementing it using the LAPACK routines.
+Moreover, in a further development of the code, it would be useful implementing an error handling module to handle exceptions and a test module to test performances.
+
+
+% include bibliography
+%\bibliography{\jobname}
+
+
+\end{document}

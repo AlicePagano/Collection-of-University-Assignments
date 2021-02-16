@@ -1,0 +1,35 @@
+SOLUTION TO EXERCISE 2
+---------------------------------------------------------------------------------------------------
+
+Student: Alice Pagano 
+Number : 1236916
+
+---------------------------------------------------------------------------------------------------
+
+The files are organized as follow:
+
++ /02_Derived_types:
+
+	- /src:
+		- elem_datatype.F: file with pre-processing options;
+		- matrix_type.f90: file which define the module matrix_type.mod;
+
+	- demo.f90: simple program which uses the matrix_type.mod
+
+	- Makefile: to compile the code use this makefile:
+		- open a terminal in the folder /02_Derived_types
+		- digit: make 
+		- the code will be compiled and the demo program will run
+		
+		Alternatively, you can compile the code with:
+		- gfortran -c -o src/matrix_type.o src/matrix_type.f90 -cpp -DELEM=Z
+		- gfortran src/matrix_type.o -o demo demo.f90
+		- ./demo
+
+	- demo: the executable.
+
+	- matrix_A.txt: output of the program;
+
+	- matrix_A_adjoint.txt: output of the program;
+
++ Ex2_Alice-Pagano.pdf: report of the exercise.

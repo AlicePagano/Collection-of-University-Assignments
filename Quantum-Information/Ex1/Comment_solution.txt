@@ -1,0 +1,9 @@
+SOLUTION TO EXERCISE 1 - COMMENTS OF SIMONE
+---------------------------------------------------------------------------------------------------
+
+- Always insert the READ_ME.txt
+
+- Use log-log scale
+
+
+
