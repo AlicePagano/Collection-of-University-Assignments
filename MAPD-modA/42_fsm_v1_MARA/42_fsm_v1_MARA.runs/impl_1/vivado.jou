@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2018.3 (64-bit)
+# SW Build 2405991 on Thu Dec  6 23:36:41 MST 2018
+# IP Build 2404404 on Fri Dec  7 01:43:56 MST 2018
+# Start of session at: Wed Dec 18 14:54:48 2019
+# Process ID: 5848
+# Current directory: /home/student08/MARA/42_fsm_v1_MARA/42_fsm_v1_MARA.runs/impl_1
+# Command line: vivado -log fsm_1.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source fsm_1.tcl -notrace
+# Log file: /home/student08/MARA/42_fsm_v1_MARA/42_fsm_v1_MARA.runs/impl_1/fsm_1.vdi
+# Journal file: /home/student08/MARA/42_fsm_v1_MARA/42_fsm_v1_MARA.runs/impl_1/vivado.jou
+#-----------------------------------------------------------
+source fsm_1.tcl -notrace

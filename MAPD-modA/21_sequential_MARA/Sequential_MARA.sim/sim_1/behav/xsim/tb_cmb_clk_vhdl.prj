@@ -1,0 +1,7 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../Sequential_MARA.srcs/sources_1/new/cmb_clk.vhd" \
+"../../../../Sequential_MARA.srcs/sim_1/new/tb_cmb_clk.vhd" \
+
+# Do not sort compile order
+nosort

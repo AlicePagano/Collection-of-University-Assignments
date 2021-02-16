@@ -1,0 +1,12 @@
+
+{ 
+    crc :  8261077417782324054  , 
+    ccp_crc :  0  , 
+    cmdline : " -wto 864ac1321349451eb55ae4476cb60eac --incr --debug typical --relax --mt 8 -L xil_defaultlib -L secureip --snapshot bram_asym_behav xil_defaultlib.bram_asym" , 
+    buildDate : "Dec  6 2018" , 
+    buildTime : "23:39:36" , 
+    linkCmd : "/usr/bin/gcc -Wa,-W  -O -fPIC  -m64  -Wl,--no-as-needed  -Wl,--unresolved-symbols=ignore-all  -o \"xsim.dir/bram_asym_behav/xsimk\"   \"xsim.dir/bram_asym_behav/obj/xsim_0.lnx64.o\" \"xsim.dir/bram_asym_behav/obj/xsim_1.lnx64.o\" -L\"/tools/Xilinx/Vivado/2018.3/lib/lnx64.o\" -lrdi_simulator_kernel  -lrdi_simbridge_kernel" , 
+    aggregate_nets : 
+    [ 
+    ] 
+} 

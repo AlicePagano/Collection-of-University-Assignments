@@ -1,0 +1,7 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../../Desktop/dual_port_ram.vhdl" \
+"../../../../project_2.srcs/sim_1/new/tb_ram.vhd" \
+
+# Do not sort compile order
+nosort

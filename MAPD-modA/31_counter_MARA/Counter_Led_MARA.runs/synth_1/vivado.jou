@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2018.3 (64-bit)
+# SW Build 2405991 on Thu Dec  6 23:36:41 MST 2018
+# IP Build 2404404 on Fri Dec  7 01:43:56 MST 2018
+# Start of session at: Tue Nov 26 09:16:03 2019
+# Process ID: 11925
+# Current directory: /home/student08/Counter_Led_MARA/Counter_Led_MARA.runs/synth_1
+# Command line: vivado -log blink.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source blink.tcl
+# Log file: /home/student08/Counter_Led_MARA/Counter_Led_MARA.runs/synth_1/blink.vds
+# Journal file: /home/student08/Counter_Led_MARA/Counter_Led_MARA.runs/synth_1/vivado.jou
+#-----------------------------------------------------------
+source blink.tcl -notrace
